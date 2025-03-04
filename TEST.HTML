@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ostrzeżenie! Nieautoryzowany dostęp</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f8d7da;
+            color: #721c24;
+            padding: 50px;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #dc3545;
+        }
+        .warning {
+            font-size: 18px;
+            font-weight: bold;
+        }
+        .tips {
+            text-align: left;
+            margin-top: 20px;
+        }
+        .tips li {
+            margin: 10px 0;
+        }
+        .countdown {
+            font-size: 24px;
+            font-weight: bold;
+            color: #dc3545;
+            margin-top: 20px;
+        }
+    </style>
+    <script>
+        function startCountdown() {
+            let timeLeft = 60; // 60 sekund
+            const countdownElement = document.getElementById("countdown");
+            const alarmSound = new Audio("https://www.soundjay.com/button/beep-09.wav");
+            
+            function updateCountdown() {
+                countdownElement.textContent = timeLeft + " sekund";
+                if (timeLeft === 10) {
+                    alarmSound.play(); // Odtwarzanie dźwięku na 10 sekund przed końcem
+                }
+                if (timeLeft <= 0) {
+                    clearInterval(interval);
+                    countdownElement.textContent = "Dane mogą być już zagrożone!";
+                    alarmSound.play(); // Powtórne odtworzenie dźwięku, gdy czas się skończy
+                }
+                timeLeft--;
+            }
+            updateCountdown(); // Natychmiastowa aktualizacja na starcie
+            const interval = setInterval(updateCountdown, 1000);
+        }
+        window.onload = startCountdown;
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1>Ostrzeżenie! Nieautoryzowany dostęp wykryty</h1>
+        <p class="warning">Twoje dane mogły zostać naruszone. Wykryliśmy podejrzaną aktywność na Twoim koncie.</p>
+        <p class="countdown">Pozostały czas na reakcję: <span id="countdown"></span></p>
+        <ul class="tips">
+            <li>Jeśli nie rozpoznajesz tej aktywności, natychmiast skontaktuj się z działem IT.</li>
+            <li>Nie podawaj swoich danych logowania na żadnych stronach zewnętrznych.</li>
+            <li>Zmiana hasła może być wymagana w celu zabezpieczenia konta.</li>
+            <li>Niezwłocznie zgłoś ten incydent do zespołu ds. bezpieczeństwa!</li>
+        </ul>
+        <p><strong>UWAGA!</strong> Każda minuta zwłoki zwiększa ryzyko naruszenia Twoich danych!</p>
+    </div>
+</body>
+</html>
